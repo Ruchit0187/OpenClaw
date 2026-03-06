@@ -21,9 +21,26 @@ COPY . .
 
 RUN mkdir build && cd build && cmake .. && make -j$(nproc)
 
-# Create config directory and copy default config
-RUN mkdir -p /root/.config/openclaw
-COPY config.xml /root/.config/openclaw/config.xml
+# Create config at build time
+RUN mkdir -p /root/.config/openclaw && \
+    printf '<?xml version="1.0" encoding="utf-8"?>\n\
+<Config>\n\
+    <Display>\n\
+        <Screen width="1024" height="768" scale="1"/>\n\
+        <Fullscreen>0</Fullscreen>\n\
+    </Display>\n\
+    <Audio>\n\
+        <Frequency>22050</Frequency>\n\
+        <SoundChannels>16</SoundChannels>\n\
+        <MixingChannels>16</MixingChannels>\n\
+        <SoundVolume>50</SoundVolume>\n\
+        <MusicVolume>50</MusicVolume>\n\
+    </Audio>\n\
+    <Assets>\n\
+        <CustomArchive>ASSETS_PATH</CustomArchive>\n\
+    </Assets>\n\
+</Config>\n' > /root/.config/openclaw/config.xml && \
+    cat /root/.config/openclaw/config.xml
 
 EXPOSE 8080
 
