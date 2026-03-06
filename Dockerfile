@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     libsdl2-gfx-dev \
     libpng-dev \
     zlib1g-dev \
+    xvfb \
     git
 
 WORKDIR /app
@@ -21,4 +22,6 @@ COPY . .
 RUN mkdir build && cd build && cmake .. && make -j$(nproc)
 
 EXPOSE 8080
-CMD ["./Build_Release/openclaw"]
+
+# Start virtual display then run openclaw
+CMD Xvfb :99 -screen 0 1024x768x16 & export DISPLAY=:99 && ./Build_Release/openclaw
