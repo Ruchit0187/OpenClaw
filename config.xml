@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config>
+    <Display>
+        <Screen width="1024" height="768" scale="1" />
+        <Fullscreen>0</Fullscreen>
+    </Display>
+    <Audio>
+        <Frequency>22050</Frequency>
+        <SoundChannels>16</SoundChannels>
+        <MixingChannels>16</MixingChannels>
+        <SoundVolume>50</SoundVolume>
+        <MusicVolume>50</MusicVolume>
+    </Audio>
+    <Assets>
+        <CustomArchive></CustomArchive>
+    </Assets>
+    <Font>
+        <FontPath></FontPath>
+    </Font>
+</Config>

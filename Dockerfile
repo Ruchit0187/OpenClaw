@@ -21,7 +21,10 @@ COPY . .
 
 RUN mkdir build && cd build && cmake .. && make -j$(nproc)
 
+# Create config directory and copy default config
+RUN mkdir -p /root/.config/openclaw
+COPY config.xml /root/.config/openclaw/config.xml
+
 EXPOSE 8080
 
-# Start virtual display then run openclaw
 CMD Xvfb :99 -screen 0 1024x768x16 & export DISPLAY=:99 && ./Build_Release/openclaw
